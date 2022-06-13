@@ -46,6 +46,20 @@ with open(file_to_load) as election_data:
         #Aalign with IF statement (so: outside of IF statement) so candidate's vote count is incremented as we iterate through each row
         candidate_votes[candidate_name] += 1
 
+# Using the open() function with the "w" mode we will write data to the file.
+with open(file_to_save, "w") as txt_file:
+
+# Print the final vote count to the terminal.
+    election_results = (
+        f"\nElection Results\n"
+        f"-------------------------\n"
+        f"Total Votes: {total_votes:,}\n"
+        f"-------------------------\n")
+    print(election_results, end="")
+    
+    # Save the final vote count to the text file.
+    txt_file.write(election_results)
+        
     # Determine the percentage  of votes for each candidate by looping through the counts..:
     # a. Iterate through he candidate list.
     for candidate_name in candidate_votes:
@@ -54,8 +68,15 @@ with open(file_to_load) as election_data:
         # c. Calculate the percentage of votes
         vote_percentage = float(votes) / float(total_votes) * 100
         
-        # Print out each candidate's name, vot count, and percentage pf votes to the termina
-        print(f"{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n")
+        # Print out each candidate's name, vote count, and percentage pf votes to the termina
+        ##print(f"{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n")
+        # ^ above code is now modified to add to a text file. take code out of 'print()' function and place in a variable
+        candidate_results = (f"{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n")
+        
+        #print each candidate, their vote count, and percentage to the terminal.
+        print(candidate_results)
+        #save the candidate results to the text file.
+        txt_file.write(candidate_results)
 
         # TO Determin the winning vote count and candidate..:
         # a. Determine if the votes is greater than the winning count.
@@ -75,6 +96,8 @@ with open(file_to_load) as election_data:
         f"---------------------------\n")
     print(winning_candidate_summary)
 
+    # Save the winning candidate's name to the text file
+    txt_file.write(winning_candidate_summary)
 
 
 
@@ -103,8 +126,7 @@ with open(file_to_load) as election_data:
 ##election_data.close()
 
 
-# Using the open() function with the "w" mode we will write data to the file.
-##with open(file_to_save, "w") as txt_file:
+
 
     #write some data to the file
     ##txt_file.write("Counties in the Election\n")
