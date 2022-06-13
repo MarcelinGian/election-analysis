@@ -8,18 +8,94 @@ file_to_load = '/Users/giannimarco/Desktop/Classwork/Challenges/Module3Challenge
 #Create a filename (assign a) vairable to a direct path to the file
 file_to_save = '/Users/giannimarco/Desktop/Classwork/Challenges/Module3Challenge/election-analysis/analysis/election_analysis.txt'
 
+# Initialize a total vote counter, set equal to zero
+total_votes = 0
+
+# Declare a new empty LIST as candidate_options
+candidate_options =[]
+
+# Declare new empty DICTIONARY as candidate_votes
+candidate_votes = {}
+
+# Winning Candidate and Winning Count Tracker
+winning_candidate = ""
+winning_count = 0
+winning_percentage = 0
+
 #open election results and read the file
 with open(file_to_load) as election_data:
 
-    #topen election results, read & analyze the data here. create file_reader variable & use "reader" function via the "csv" module
+    # read & analyze the data here. create file_reader variable & use "reader" function via the "csv" module
     file_reader = csv.reader(election_data)
     
-    #Read & print header row
+    #Read the header row
     headers = next(file_reader)
-    print(headers)
+    
     #print each row in th csv file
-    ##for row in file_reader:
-        ## print(row)
+    for row in file_reader:
+        # Add to the total vote count.
+        total_votes += 1
+        # Print thte candidate name from each row
+        candidate_name = row[2]
+        # IF the candidate does not match any existing candidate...
+        if candidate_name not in candidate_options:
+            # Add it to the list of candidates.
+            candidate_options.append(candidate_name)
+            # Begin tracking that candidate's vote count
+            candidate_votes[candidate_name] = 0
+        #Aalign with IF statement (so: outside of IF statement) so candidate's vote count is incremented as we iterate through each row
+        candidate_votes[candidate_name] += 1
+
+    # Determine the percentage  of votes for each candidate by looping through the counts..:
+    # a. Iterate through he candidate list.
+    for candidate_name in candidate_votes:
+        # b. Retrieve vote count of a candidate.
+        votes = candidate_votes[candidate_name]
+        # c. Calculate the percentage of votes
+        vote_percentage = float(votes) / float(total_votes) * 100
+        
+        # Print out each candidate's name, vot count, and percentage pf votes to the termina
+        print(f"{candidate_name}: {vote_percentage:.1f}% ({votes:,})\n")
+
+        # TO Determin the winning vote count and candidate..:
+        # a. Determine if the votes is greater than the winning count.
+        if (votes > winning_count) and (vote_percentage > winning_percentage):
+            # b. If true then set winning_count = votes and winning_percent = vote_percentage
+            winning_count = votes
+            winning_percentage = vote_percentage
+            # c. And, set the winning_candidate equal to candidate's name>
+            winning_candidate = candidate_name
+
+    # Print out the winning candidate, vote count, and percentage to terminal.
+    winning_candidate_summary = (
+        f"--------------------------\n"
+        f"Winner: {winning_candidate}\n"
+        f"Winnig Vote Count: {winning_count:,}\n"
+        f"Winning Percntage: {winning_percentage:.1f}%\n"
+        f"---------------------------\n")
+    print(winning_candidate_summary)
+
+
+
+
+
+
+
+
+
+
+
+# Print the candidate name and percentage votes
+##print(f"{candidate_name}: received {vote_percentage:.2f}% of the vote.")
+
+# Print the candidate vote dictionary
+##print(candidate_votes)      
+
+#Add a print statement that is flush with the left margin to print out the candidate_options list.
+##print(candidate_options)
+
+#Print the total votes.
+##print(total_votes)
     
     ##print(election_data)
 
