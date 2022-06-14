@@ -46,6 +46,10 @@ with open(file_to_load) as election_data:
         #Aalign with IF statement (so: outside of IF statement) so candidate's vote count is incremented as we iterate through each row
         candidate_votes[candidate_name] += 1
 
+        #TEST
+        county_name = row[1]
+        print(county_name)
+    
 # Using the open() function with the "w" mode we will write data to the file.
 with open(file_to_save, "w") as txt_file:
 
