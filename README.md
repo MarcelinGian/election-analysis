@@ -18,8 +18,13 @@
   - Raymon A. Doane: Candidate received 11, 606 votes, this was 3.1% of total votes cast.
  
 - Diane DeGette was the winner of the election. With a total of 272, 892 cast for her, she was favored by 73.8% of the electorate.
+
+### See Analysis Summary below
   
+![Screen Shot 2022-06-15 at 9 52 34 PM](https://user-images.githubusercontent.com/105818879/173994603-40e6a456-a166-4b84-93c6-eaa5592b317c.png)
+
 
 ## Election Audit Summary
 #### This is a versitle script that can be used, with some modifications, for any election. For example:
-- if the "election_res
+- With the information already available in the "election_results.csv" file, we can see the distribution of votes by csndidate within a specific county. Charles C. Stockholm may have won the majority of votes in Jefferson & Arapahoe counties but still lost the election because Diane DeGette was heavily favored in Denver County.
+- For smaller elections within a county, where votes are distributed across districts, we can easily substitue disctrict information in place of our county-specific for loop.
